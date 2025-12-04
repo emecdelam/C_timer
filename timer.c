@@ -6,7 +6,7 @@ FILE* bench_output = NULL;
 static pthread_mutex_t bench_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 
-
+// Initialize the bench file output
 int bench_init(const char* filename) {
     if (BENCH_DISABLE) {
         return 0;
@@ -20,6 +20,8 @@ int bench_init(const char* filename) {
     return 0;
 }
 
+
+// Starts a benchmark for a function given the name
 bench_t bench_start(const char* name) {
     struct timespec start, end = {0, 0};
     if (BENCH_DISABLE) {
@@ -33,6 +35,25 @@ bench_t bench_start(const char* name) {
     return bench;
 }
 
+// Gets the elapsed time in nanoseconds for a benchmark
+double bench_get(bench_t bench) {
+    if (BENCH_DISABLE) {
+        return 0.0;
+    }
+    
+    long elapsed_sec = bench.end.tv_sec - bench.start.tv_sec;
+    long elapsed_ns = bench.end.tv_nsec - bench.start.tv_nsec;
+    
+    if (elapsed_ns < 0) {
+        elapsed_sec--;
+        elapsed_ns += 1000000000L;
+    }
+    
+    return elapsed_sec * 1000000000.0 + elapsed_ns;
+}
+
+
+// Stops a benchmark for a function
 int bench_stop(bench_t bench) {
     if (BENCH_DISABLE) {
         return 0;
@@ -65,6 +86,8 @@ int bench_stop(bench_t bench) {
     return 0;
 }
 
+
+// Closes the output file
 int bench_deinit() {
     if (BENCH_DISABLE) {
         return 0;
