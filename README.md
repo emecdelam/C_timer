@@ -62,7 +62,7 @@ And a graph
 
 In `timer.h` you can configure these
 ```
-// Change to disable benchmarks
+// Change to disable benchmarks (faster program)
 #define BENCH_DISABLE 0
 // Change to disable multithread safety (faster in single thread)
 #define BENCH_MULTITHREAD 1

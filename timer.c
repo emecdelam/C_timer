@@ -3,14 +3,11 @@
 #include "timer.h"
 
 FILE* bench_output = NULL;
-static pthread_mutex_t bench_mutex = PTHREAD_MUTEX_INITIALIZER;
-
+static pthread_mutex_t __attribute__((unused)) bench_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 // Initialize the bench file output
-int bench_init(const char* filename) {
-    if (BENCH_DISABLE) {
-        return 0;
-    }
+int bench_init(const char* filename __attribute__((unused))) {
+#if !BENCH_DISABLE
     bench_output = fopen(filename, "w");
     if (bench_output == NULL) {
         perror("Failed to open benchmark output file");
@@ -18,29 +15,30 @@ int bench_init(const char* filename) {
     }
     fprintf(bench_output, "name,start_ns,end_ns,elapsed_ns\n");
     return 0;
+#else
+    return 0;
+#endif
 }
 
 
 // Starts a benchmark for a function given the name
-bench_t bench_start(const char* name) {
+bench_t bench_start(const char* name __attribute__((unused))) {
+#if !BENCH_DISABLE
     struct timespec start, end = {0, 0};
-    if (BENCH_DISABLE) {
-        return (bench_t){.start = start, .end = end, .name = name};
-    }
     if (strchr(name, ',') != NULL) {
         fprintf(stderr, "Warning: benchmark name contains ',' which will corrupt CSV output\n");
     }
     clock_gettime(CLOCK_MONOTONIC, &start);
     bench_t bench = {.start = start, .end = end, .name = name};
     return bench;
+#else
+    return (bench_t){0};
+#endif
 }
 
 // Gets the elapsed time in nanoseconds for a benchmark
-double bench_get(bench_t bench) {
-    if (BENCH_DISABLE) {
-        return 0.0;
-    }
-    
+double bench_get(bench_t bench __attribute__((unused))) {
+#if !BENCH_DISABLE
     long elapsed_sec = bench.end.tv_sec - bench.start.tv_sec;
     long elapsed_ns = bench.end.tv_nsec - bench.start.tv_nsec;
     
@@ -50,14 +48,15 @@ double bench_get(bench_t bench) {
     }
     
     return elapsed_sec * 1000000000.0 + elapsed_ns;
+#else
+    return 0.0;
+#endif
 }
 
 
 // Stops a benchmark for a function
-int bench_stop(bench_t bench) {
-    if (BENCH_DISABLE) {
-        return 0;
-    }
+int bench_stop(bench_t bench __attribute__((unused))) {
+#if !BENCH_DISABLE
     clock_gettime(CLOCK_MONOTONIC, &bench.end);
     
     long elapsed_sec = bench.end.tv_sec - bench.start.tv_sec;
@@ -81,17 +80,14 @@ int bench_stop(bench_t bench) {
     if (BENCH_MULTITHREAD) {
         pthread_mutex_unlock(&bench_mutex);
     }
-
-           
+#endif
     return 0;
 }
 
 
 // Closes the output file
 int bench_deinit() {
-    if (BENCH_DISABLE) {
-        return 0;
-    }
+#if !BENCH_DISABLE
     if (bench_output != NULL) {
         fflush(bench_output);
         fclose(bench_output);
@@ -99,4 +95,7 @@ int bench_deinit() {
         return 0;
     }
     return -1;
+#else
+    return 0;
+#endif
 }
