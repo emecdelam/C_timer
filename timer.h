@@ -22,6 +22,8 @@ int bench_init(const char* filename);
 
 bench_t bench_start(const char* name);
 
+double bench_get(bench_t bench)
+
 int bench_stop(bench_t bench);
 
 
