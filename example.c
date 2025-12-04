@@ -5,6 +5,10 @@
 #define NUM_THREADS 16
 #define ITERATIONS_PER_THREAD 30
 
+static char alphabeth[NUM_THREADS] = "abcdefghijklmnop";
+
+
+
 long rand_range(long min, long max) {
     return min + (rand() % (max - min + 1));
 }
@@ -20,7 +24,7 @@ void* thread_work(void* arg) {
     int thread_id = (intptr_t)arg;
     
     char name[64];
-    snprintf(name, sizeof(name), "thread_%d_work", thread_id);
+    snprintf(name, sizeof(name), "my_function_%c", alphabeth[thread_id]);
     
     for (int i = 0; i < ITERATIONS_PER_THREAD; i++) {
         // -- USER --

@@ -5,7 +5,7 @@ import matplotlib.patches as mpatches
 import csv
 from collections import defaultdict
 
-def plot_chart(csv_file, output_file):   
+def plot_chart(csv_file, output_file, filter_funcs=None):   
     data = []
     with open(csv_file, 'r') as f:
         reader = csv.DictReader(f)
@@ -25,6 +25,12 @@ def plot_chart(csv_file, output_file):
     for row in data:
         row['start_ms'] -= min_start
         row['end_ms'] -= min_start
+    
+    if filter_funcs:
+        data = [row for row in data if row['name'] in filter_funcs]
+        if not data:
+            print(f"Error: No matching functions found. Available: {list(dict.fromkeys(row['name'] for row in data))}")
+            return
     
     functions = list(dict.fromkeys(row['name'] for row in data))
     func_to_y = {func: i for i, func in enumerate(functions)}
@@ -91,9 +97,10 @@ if __name__ == "__main__":
     
     csv_file = "benchmarks.csv" if len(sys.argv) < 2 else sys.argv[1]
     output_file = "chart.png" if len(sys.argv) < 3 else sys.argv[2]
+    filter_funcs = sys.argv[3:] if len(sys.argv) > 3 else None
     
     try:
-        plot_chart(csv_file, output_file)
+        plot_chart(csv_file, output_file, filter_funcs)
     except FileNotFoundError:
         print(f"Error: Could not find {csv_file}")
         sys.exit(1)

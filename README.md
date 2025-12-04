@@ -15,6 +15,13 @@ bench_t b = bench_start("function");
 function(...);
 bench_stop(b);
 ```
+## Plotting
+
+For plotting, youc an specify multiple arguments like so
+```python
+python3 plot.py {filename.csv} {output.png} [banned_function_a banned_function_b]
+```
+
 
 ## Results
 
