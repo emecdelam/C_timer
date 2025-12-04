@@ -1,6 +1,6 @@
 # C_timer
 
-A simple thread safe library for measuring time impact of functions
+A simple toggable thread safe library for measuring time impact of functions
 
 ## Usage
 
