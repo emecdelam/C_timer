@@ -89,6 +89,8 @@ def plot_chart(csv_file, output_file, filter_funcs=None):
     for func in sorted_funcs:
         times = stats[func]
         print(f"{func:<30} {sum(times)/len(times):<12.3f} {len(times):<8} {min(times):<12.3f} {max(times):<12.3f} {sum(times):<12.3f}")
+        
+    print("\n\n")
     plt.show()
     
     

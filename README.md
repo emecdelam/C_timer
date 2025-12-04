@@ -31,27 +31,27 @@ You should get a printout like this :
 === Benchmark stats ===
 Total records: 480
 Unique functions: 16
-Total time range: 648.95 ms
+Total time range: 491.73 ms
 
 ======= Results =======
 Function                       Mean (ms)    Count    Min (ms)     Max (ms)     Total (ms)  
 ------------------------------------------------------------------------------------------
-thread_1_work                  16.784       30       0.780        106.473      503.532     
-thread_11_work                 15.898       30       1.147        97.130       476.926     
-thread_4_work                  15.849       30       0.433        78.355       475.480     
-thread_5_work                  15.375       30       0.411        45.932       461.249     
-thread_0_work                  15.330       30       0.846        84.656       459.912     
-thread_12_work                 15.238       30       0.653        117.632      457.148     
-thread_13_work                 15.158       30       0.415        56.311       454.731     
-thread_9_work                  14.783       30       0.045        81.268       443.502     
-thread_6_work                  14.669       30       0.240        83.822       440.073     
-thread_7_work                  14.538       30       0.421        70.464       436.149     
-thread_10_work                 14.299       30       0.091        88.134       428.955     
-thread_3_work                  14.152       30       0.274        84.907       424.574     
-thread_8_work                  14.064       30       0.246        51.873       421.906     
-thread_15_work                 14.026       30       0.490        81.235       420.788     
-thread_14_work                 14.001       30       0.297        105.298      420.034     
-thread_2_work                  13.359       30       0.190        67.093       400.770     
+my_function_h                  10.669       30       0.802        20.488       320.068     
+my_function_d                  10.588       30       1.903        19.251       317.648     
+my_function_a                  10.265       30       0.091        21.650       307.949     
+my_function_g                  10.265       30       0.733        18.808       307.936     
+my_function_i                  10.082       30       0.036        20.544       302.460     
+my_function_c                  10.042       30       0.244        25.008       301.254     
+my_function_e                  9.860        30       1.046        32.404       295.806     
+my_function_j                  9.552        30       0.295        21.835       286.556     
+my_function_o                  9.356        30       0.311        20.392       280.676     
+my_function_b                  9.283        30       0.113        25.766       278.475     
+my_function_k                  9.223        30       1.224        18.620       276.701     
+my_function_l                  9.033        30       0.209        21.302       270.985     
+my_function_n                  8.908        30       0.352        23.941       267.229     
+my_function_m                  8.823        30       0.023        22.632       264.693     
+my_function_f                  8.760        30       0.685        21.283       262.803     
+my_function_p                  7.502        30       0.371        19.719       225.064    
 ```
 
 And a similar graph
