@@ -14,7 +14,6 @@ For benchmarks, you simply need to follow this template
 bench_t b = bench_start("function");
 function(...);
 bench_stop(b);
-// -- USER --
 ```
 
 ## Results
@@ -50,7 +49,7 @@ thread_2_work                  13.359       30       0.190        67.093       4
 
 And a similar graph
 
-![alt text](https://github.com/emecdelam/C_timer/blob/[branch]/image.jpg?raw=true)
+![alt text](https://github.com/emecdelam/C_timer/blob/master/assets/example.png)
 
 ## Configuration
 
