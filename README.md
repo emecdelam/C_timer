@@ -54,7 +54,7 @@ my_function_f                  8.760        30       0.685        21.283       2
 my_function_p                  7.502        30       0.371        19.719       225.064    
 ```
 
-And a similar graph
+And a graph
 
 ![alt text](https://github.com/emecdelam/C_timer/blob/master/assets/example.png)
 
